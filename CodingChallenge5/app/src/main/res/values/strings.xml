@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">CodingChallenge5</string>
+    <string name="add_item">Add Item</string>
+    <string name="apple">Apple</string>
+    <string name="orange">Orange</string>
+    <string name="banana">Banana</string>
+    <string name="chees">Chees</string>
+    <string name="candy">Candy</string>
+    <string name="bread">Bread</string>
+    <string name="eggs">Eggs</string>
+    <string name="meat">Meat</string>
+    <string name="milk">Milk</string>
+    <string name="water">Water</string>
+    <string name="enter_a_store_to_find_on_a_map">Enter a store to find on a map</string>
+    <string name="find_store">Find Store</string>
+</resources>

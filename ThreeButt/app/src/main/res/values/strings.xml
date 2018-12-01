@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ThreeButt</string>
+    <string name="text_one">Text One</string>
+    <string name="text_two">Text Two</string>
+    <string name="text_three">Text Three</string>
+    <string name="hello_world">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Nullam lectus eros, posuere ut consectetur sit amet, aliquam hendrerit nibh.
+        Fusce venenatis hendrerit lectus, vitae bibendum enim finibus eget.
+        Curabitur turpis diam, imperdiet eget risus tempor, euismod molestie dui.
+        Quisque pharetra nisl eu tortor convallis accumsan.
+        Quisque rhoncus felis tortor, sed consequat urna mollis ut.
+        Aenean ut nulla magna. In vitae lobortis nibh.
+        Mauris leo purus, rhoncus ut diam id, rutrum pellentesque tellus.
+        Vestibulum urna felis, porttitor vel urna ut, cursus lobortis ante.
+    </string>
+</resources>
