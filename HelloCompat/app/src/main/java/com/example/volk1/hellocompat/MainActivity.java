@@ -1,5 +1,6 @@
 package com.example.volk1.hellocompat;
 
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,11 +40,15 @@ public class MainActivity extends AppCompatActivity {
         String colorName = mColorArray[random.nextInt(20)];
 
         // Get the color identifier that matches the color name.
-        int colorResourceName = getResources().getIdentifier(colorName,"color", getApplicationContext().getPackageName());
+        int colorResourceName = getResources().getIdentifier(colorName, "color", getApplicationContext().getPackageName());
 
         // Get the color ID from the resources the compatible way.
-        // int colorRes = getResources().getColor(colorResourceName, this.getTheme());
-        int colorRes = ContextCompat.getColor(this, colorResourceName);
+        int colorRes;
+        if (Build.VERSION_CODES.M >= 23)
+            colorRes = getResources().getColor(colorResourceName, this.getTheme());
+        else
+            colorRes = ContextCompat.getColor(this, colorResourceName);
+
 
         // Set the text color.
         mHelloTextView.setTextColor(colorRes);
