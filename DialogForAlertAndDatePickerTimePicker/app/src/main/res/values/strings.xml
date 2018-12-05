@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Dialog For Alert</string>
+    <string name="alert">Alert</string>
+    <string name="hello_world_tap_to_test_the_alert">Hello World! Tap to test the alert</string>
+    <string name="choose_a_date">Choose a date</string>
+    <string name="date">Date</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_a_time">Choose a time</string>
+    <string name="time">Time</string>
+</resources>
