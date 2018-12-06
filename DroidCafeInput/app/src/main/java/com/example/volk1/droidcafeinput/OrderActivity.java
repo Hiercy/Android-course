@@ -2,6 +2,7 @@ package com.example.volk1.droidcafeinput;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -77,5 +78,19 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         // Do nothing
+    }
+
+    public void showDatePicker(View view) {
+        DialogFragment fragment = new DatePickerFragment();
+        fragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void processDate(int year, int month, int day) {
+        String year_string = Integer.toString(year);
+        String month_string = Integer.toString(month+1);
+        String day_string = Integer.toString(day);
+        String date = day_string + "/" + month_string + "/" + year_string;
+
+        Toast.makeText(this, "Date: " + date, Toast.LENGTH_SHORT).show();
     }
 }
