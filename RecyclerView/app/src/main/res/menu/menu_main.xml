@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.volk1.recyclerview.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/reset"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/deleteall"
+        android:title="Delete All"
+        app:showAsAction="never" />
+</menu>
