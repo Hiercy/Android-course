@@ -14,13 +14,16 @@ import java.util.ArrayList;
 
 public class RecepieAdapter extends RecyclerView.Adapter<RecepieAdapter.RecipeHolder> {
 
-    private ArrayList<Recipe> mRecipes = new ArrayList<>();
+    private ArrayList<Recipe> mRecipes;
+    private ArrayList<String> mImage;
+
     private LayoutInflater mInflater;
     private Context context;
 
-    public RecepieAdapter(Context context, ArrayList<Recipe> mRecipes) {
+    public RecepieAdapter(Context context, ArrayList<String> mImage, ArrayList<Recipe> mRecipes) {
         this.context = context;
         mInflater = LayoutInflater.from(context);
+        this.mImage = mImage;
         this.mRecipes = mRecipes;
     }
 
@@ -64,6 +67,7 @@ public class RecepieAdapter extends RecyclerView.Adapter<RecepieAdapter.RecipeHo
             public void onClick(View view) {
                 Intent intent = new Intent(context, RecActivity.class);
                 intent.putExtra("recep_full", String.valueOf(mRecipes.get(position).getBody()));
+                intent.putExtra("image", mImage.get(position));
                 context.startActivity(intent);
             }
         });
