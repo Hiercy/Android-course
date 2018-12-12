@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +20,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView mScoreText1;
     private TextView mScoreText2;
 
+    private ImageButton mPlusTeamOne;
+    private ImageButton mPlusTeamTwo;
+
+//    private AnimationDrawable mAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
         mScoreText1 = findViewById(R.id.score1);
         mScoreText2 = findViewById(R.id.score2);
+
+        mPlusTeamOne = findViewById(R.id.increase_team1);
+
+
+        mPlusTeamTwo = findViewById(R.id.increase_team2);
+//        mPlusTeamTwo.setBackgroundResource(R.drawable.select_plus_background);
+
 
         if (savedInstanceState != null) {
             score1 = savedInstanceState.getInt(STATE_SCORE_1);
@@ -101,4 +114,13 @@ public class MainActivity extends AppCompatActivity {
 
         super.onSaveInstanceState(outState);
     }
+
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocused) {
+//        super.onWindowFocusChanged(hasFocused);
+//
+//        mPlusTeamOne.setBackgroundResource(R.drawable.select_plus_background);
+//        mAnimation = (AnimationDrawable) mPlusTeamOne.getBackground();
+//        mAnimation.start();
+//    }
 }
