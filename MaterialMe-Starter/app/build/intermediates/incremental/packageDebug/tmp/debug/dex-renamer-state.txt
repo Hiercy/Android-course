@@ -1,0 +1,4 @@
+#Fri Dec 14 16:55:37 MSK 2018
+base.0=C\:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\MaterialMe-Starter\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
