@@ -15,11 +15,13 @@
     
     <style name="PlusButton" parent="ScoreButtons">
         <item name="android:src">@drawable/select_plus_background</item>
+        <!--<item name="android:src">@drawable/ic_plus</item>-->
         <item name="android:contentDescription">@string/plus_button</item>
     </style>
 
     <style name="MinusButton" parent="ScoreButtons">
         <item name="android:src">@drawable/select_minus_background</item>
+        <!--<item name="android:src">@drawable/ic_minus</item>-->
         <item name="android:contentDescription">@string/minus_button</item>
     </style>
 
