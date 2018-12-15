@@ -18,6 +18,7 @@ package com.example.android.materialme;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,11 @@ import java.util.Collections;
  * with poor design choices.
  */
 public class MainActivity extends AppCompatActivity {
+
+    private String[] sportsList;
+    private String[] sportsInfo;
+    private String[] sportText;
+    private TypedArray sportsImageResources;
 
     // Member variables.
     private RecyclerView mRecyclerView;
@@ -76,8 +82,25 @@ public class MainActivity extends AppCompatActivity {
         });
         helper.attachToRecyclerView(mRecyclerView);
 
-        // Get the data.
-        initializeData();
+        if (savedInstanceState != null) {
+            mSportsData = savedInstanceState.getParcelableArrayList("list");
+            sportsList = savedInstanceState.getStringArray("sports_list");
+            sportsInfo = savedInstanceState.getStringArray("sports_info");
+            sportText = savedInstanceState.getStringArray("sports_text");
+            sportsImageResources = getResources().obtainTypedArray(R.array.sport_images);
+
+            mAdapter = new SportsAdapter(this, mSportsData);
+            mRecyclerView.setAdapter(mAdapter);
+
+            for (int i = 0; i < sportsList.length; i++) {
+                mSportsData.add(new Sport(sportsList[i], sportsInfo[i], sportText[i], sportsImageResources.getResourceId(i, 0)));
+            }
+            sportsImageResources.recycle();
+            mAdapter.notifyDataSetChanged();
+        } else {
+            // Get the data.
+            initializeData();
+        }
     }
 
     /**
@@ -85,20 +108,22 @@ public class MainActivity extends AppCompatActivity {
      */
     private void initializeData() {
         // Get the resources from the XML file.
-        String[] sportsList = getResources()
+        sportsList = getResources()
                 .getStringArray(R.array.sports_titles);
-        String[] sportsInfo = getResources()
+        sportsInfo = getResources()
                 .getStringArray(R.array.sports_info);
-        TypedArray sportsImageResources = getResources()
+        sportsImageResources = getResources()
                 .obtainTypedArray(R.array.sport_images);
+        sportText = getResources().
+                getStringArray(R.array.sports_info_detail);
 
         // Clear the existing data (to avoid duplication).
         mSportsData.clear();
 
         // Create the ArrayList of Sports objects with titles and
         // information about each sport.
-        for(int i=0;i<sportsList.length;i++){
-            mSportsData.add(new Sport(sportsList[i],sportsInfo[i],sportsImageResources.getResourceId(i, 0)));
+        for (int i = 0; i < sportsList.length; i++) {
+            mSportsData.add(new Sport(sportsList[i], sportsInfo[i], sportText[i], sportsImageResources.getResourceId(i, 0)));
         }
 
         sportsImageResources.recycle();
@@ -108,5 +133,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void reset(View view) {
         initializeData();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("list", mSportsData);
+        outState.putStringArray("sports_list", sportsList);
+        outState.putStringArray("sports_info", sportsInfo);
+        outState.putStringArray("sports_text", sportText);
+
+        super.onSaveInstanceState(outState);
     }
 }

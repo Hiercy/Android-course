@@ -18,6 +18,7 @@ anim design_snackbar_out
 animator design_appbar_state_list_animator
 array sport_images
 array sports_info
+array sports_info_detail
 array sports_titles
 attr actionBarDivider
 attr actionBarItemBackground

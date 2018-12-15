@@ -59,8 +59,7 @@ class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder>  {
      * @return The newly created ViewHolder.
      */
     @Override
-    public SportsAdapter.ViewHolder onCreateViewHolder(
-            ViewGroup parent, int viewType) {
+    public SportsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mContext).
                 inflate(R.layout.list_item, parent, false));
     }
@@ -133,8 +132,9 @@ class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.ViewHolder>  {
             Sport currentSport = mSportsData.get(getAdapterPosition());
 
             Intent intentDetail = new Intent(mContext, DetailActivity.class);
-            intentDetail.putExtra("title", currentSport.getTitle());
             intentDetail.putExtra("image_resources", currentSport.getImageResource());
+            intentDetail.putExtra("title", currentSport.getTitle());
+            intentDetail.putExtra("text", currentSport.getText());
             mContext.startActivity(intentDetail);
         }
     }

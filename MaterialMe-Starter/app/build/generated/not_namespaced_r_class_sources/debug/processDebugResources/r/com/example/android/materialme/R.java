@@ -32,7 +32,8 @@ public final class R {
   public static final class array {
     public static final int sport_images=0x7f030000;
     public static final int sports_info=0x7f030001;
-    public static final int sports_titles=0x7f030002;
+    public static final int sports_info_detail=0x7f030002;
+    public static final int sports_titles=0x7f030003;
   }
   public static final class attr {
     /**

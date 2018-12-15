@@ -17,7 +17,8 @@ int anim design_snackbar_out 0x7f01000f
 int animator design_appbar_state_list_animator 0x7f020000
 int array sport_images 0x7f030000
 int array sports_info 0x7f030001
-int array sports_titles 0x7f030002
+int array sports_info_detail 0x7f030002
+int array sports_titles 0x7f030003
 int attr actionBarDivider 0x7f040000
 int attr actionBarItemBackground 0x7f040001
 int attr actionBarPopupTheme 0x7f040002

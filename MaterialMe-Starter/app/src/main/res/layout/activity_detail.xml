@@ -45,6 +45,5 @@
             android:padding="16dp"
             android:text="@string/lorem" />
 
-
     </RelativeLayout>
 </ScrollView>
