@@ -14,7 +14,8 @@
             android:id="@+id/sportsImageDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:transitionName="image_transition" />
 
         <TextView
             android:id="@+id/titleDetail"
@@ -34,7 +35,8 @@
             android:layout_below="@id/sportsImageDetail"
             android:padding="16dp"
             android:text="@string/news_placeholder"
-            android:textColor="?android:textColorSecondary" />
+            android:textColor="?android:textColorSecondary"
+            android:transitionName="title_transition"/>
 
         <TextView
             android:id="@+id/subTitleDetail"
@@ -43,7 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/newsTitleDetail"
             android:padding="16dp"
-            android:text="@string/lorem" />
+            android:text="@string/lorem"
+            android:transitionName="text_transition"/>
 
     </RelativeLayout>
 </ScrollView>
