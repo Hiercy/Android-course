@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/circle"
+        android:layout_width="@dimen/images_size"
+        android:layout_height="@dimen/images_size"
+        android:layout_above="@+id/anchor"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_toLeftOf="@+id/anchor"
+        android:background="@drawable/red_circle" />
+
+    <ImageView
+        android:id="@+id/android"
+        android:layout_width="@dimen/images_size"
+        android:layout_height="@dimen/images_size"
+        android:layout_below="@+id/circle"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_toLeftOf="@+id/anchor"
+        android:src="@drawable/ic_android_black"
+        android:tint="@android:color/holo_green_light" />
+
+    <View
+        android:id="@+id/anchor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true" />
+
+    <ImageView
+        android:id="@+id/blueLine"
+        android:layout_width="@dimen/images_size"
+        android:layout_height="@dimen/images_size"
+        android:layout_above="@+id/anchor"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_toEndOf="@+id/anchor"
+        android:background="@drawable/blue_line"
+        android:transitionName="switchBlue" />
+
+    <ImageView
+        android:id="@+id/yellowBlock"
+        android:layout_width="@dimen/images_size"
+        android:layout_height="@dimen/images_size"
+        android:layout_below="@+id/blueLine"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_toRightOf="@+id/anchor"
+        android:background="@color/yellow"/>
+
+
+</RelativeLayout>
