@@ -4,6 +4,23 @@
             "outputFile": "C:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\MaterialMe-Starter\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\MaterialMe-Starter\\app\\src\\main\\res\\values-land\\integers.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endColumns": "50",
+                        "endOffsets": "103"
+                    },
+                    "to": {
+                        "startLines": "6",
+                        "startColumns": "4",
+                        "startOffsets": "328",
+                        "endColumns": "50",
+                        "endOffsets": "374"
+                    }
+                },
+                {
                     "source": "C:\\Users\\volk1\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\f49ee1750b939680d628bdbfd34f1afc\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2",
@@ -14,12 +31,12 @@
                         "endOffsets": "232"
                     },
                     "to": {
-                        "startLines": "6",
+                        "startLines": "7",
                         "startColumns": "4",
-                        "startOffsets": "328",
-                        "endLines": "9",
+                        "startOffsets": "379",
+                        "endLines": "10",
                         "endColumns": "12",
-                        "endOffsets": "505"
+                        "endOffsets": "556"
                     }
                 },
                 {

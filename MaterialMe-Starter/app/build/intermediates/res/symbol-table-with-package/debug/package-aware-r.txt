@@ -1028,6 +1028,7 @@ integer bottom_sheet_slide_duration
 integer cancel_button_image_alpha
 integer config_tooltipAnimTime
 integer design_snackbar_text_max_lines
+integer grid_column_count
 integer hide_password_duration
 integer show_password_duration
 integer status_bar_notification_info_maxnum
@@ -1332,6 +1333,9 @@ style RtlOverlay_Widget_AppCompat_Search_DropDown_Text
 style RtlOverlay_Widget_AppCompat_SearchView_MagIcon
 style RtlUnderlay_Widget_AppCompat_ActionButton
 style RtlUnderlay_Widget_AppCompat_ActionButton_Overflow
+style SportsDetailText
+style SportsDetailTitle
+style SportsTitle
 style TextAppearance_AppCompat
 style TextAppearance_AppCompat_Body1
 style TextAppearance_AppCompat_Body2

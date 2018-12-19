@@ -4,6 +4,25 @@
             "outputFile": "C:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\MaterialMe-Starter\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ru\\values-ru.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\MaterialMe-Starter\\app\\src\\main\\res\\values-ru\\strings.xml",
+                    "from": {
+                        "startLines": "50,36,8,22,2,6,4,5,3",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "6296,5604,1666,5184,57,293,165,219,108",
+                        "endLines": "62,48,20,34,2,6,4,5,3",
+                        "endColumns": "12,19,19,19,49,1369,52,72,55",
+                        "endOffsets": "6827,6288,5176,5596,102,1658,213,287,159"
+                    },
+                    "to": {
+                        "startLines": "2,15,28,41,71,72,73,75,77",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,629,1306,4809,7001,7051,8421,8555,8729",
+                        "endLines": "14,27,40,53,71,72,73,75,77",
+                        "endColumns": "12,19,19,19,49,1369,52,72,55",
+                        "endOffsets": "624,1301,4804,5209,7046,8416,8469,8623,8780"
+                    }
+                },
+                {
                     "source": "C:\\Users\\volk1\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\9c34200df4f4093a0ca9a666a20d05b4\\res\\values-ru\\values-ru.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
@@ -11,6 +30,13 @@
                         "startOffsets": "105,220,322,434,520,625,745,824,902,982,1088,1196,1294,1403,1509,1617,1792,1892",
                         "endColumns": "114,101,111,85,104,119,78,77,79,105,107,97,108,105,107,174,99,80",
                         "endOffsets": "215,317,429,515,620,740,819,897,977,1083,1191,1289,1398,1504,1612,1787,1887,1968"
+                    },
+                    "to": {
+                        "startLines": "54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,74",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "5214,5329,5431,5543,5629,5734,5854,5933,6011,6091,6197,6305,6403,6512,6618,6726,6901,8474",
+                        "endColumns": "114,101,111,85,104,119,78,77,79,105,107,97,108,105,107,174,99,80",
+                        "endOffsets": "5324,5426,5538,5624,5729,5849,5928,6006,6086,6192,6300,6398,6507,6613,6721,6896,6996,8550"
                     }
                 },
                 {
@@ -23,11 +49,11 @@
                         "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "20",
+                        "startLines": "76",
                         "startColumns": "4",
-                        "startOffsets": "1973",
+                        "startOffsets": "8628",
                         "endColumns": "100",
-                        "endOffsets": "2069"
+                        "endOffsets": "8724"
                     }
                 }
             ]

@@ -24,12 +24,31 @@
                         "endOffsets": "110,180,251,323,381,439,545,609,672,854"
                     },
                     "to": {
-                        "startLines": "10,11,12,13,14,15,16,17,18,19",
+                        "startLines": "10,11,12,13,14,15,16,17,18,31",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "611,671,741,812,884,942,1000,1106,1170,1233",
-                        "endLines": "10,11,12,13,14,15,16,17,18,22",
+                        "startOffsets": "611,671,741,812,884,942,1000,1106,1170,1953",
+                        "endLines": "10,11,12,13,14,15,16,17,18,34",
                         "endColumns": "59,69,70,71,57,57,105,63,62,12",
-                        "endOffsets": "666,736,807,879,937,995,1101,1165,1228,1410"
+                        "endOffsets": "666,736,807,879,937,995,1101,1165,1228,2130"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\MaterialMe-Starter\\app\\src\\main\\res\\values-sw600dp\\styles.xml",
+                    "from": {
+                        "startLines": "4,13,15",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "97,588,671",
+                        "endLines": "11,13,17",
+                        "endColumns": "12,79,12",
+                        "endOffsets": "580,663,827"
+                    },
+                    "to": {
+                        "startLines": "19,27,28",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "1233,1714,1794",
+                        "endLines": "26,27,30",
+                        "endColumns": "12,79,12",
+                        "endOffsets": "1709,1789,1948"
                     }
                 }
             ]

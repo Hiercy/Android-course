@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\MaterialMe-Starter\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w600dp-v13\\values-w600dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\MaterialMe-Starter\\app\\src\\main\\res\\values-w600dp\\integers.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endColumns": "50",
+                        "endOffsets": "103"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "50",
+                        "endOffsets": "101"
+                    }
+                }
+            ]
+        }
+    ]
+}
