@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
         for (int i = 0; i <= 20; i++) {
@@ -33,10 +36,12 @@ public class MainActivity extends AppCompatActivity {
             mWordList = mWordListReset;
         }
 
+        int gridCount = getResources().getInteger(R.integer.grid_column_name);
+
         mRecyclerView = findViewById(R.id.recyclerview);
         mAdapter = new WordListAdapter(this, mWordList);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, gridCount));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,15 +82,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void reset() {
-        mWordList.clear();
-        for (int i = 0; i <= 20; i++)
-            mWordList.add("Word " + i);
-        mRecyclerView.getAdapter().notifyDataSetChanged();
+        initializeData();
     }
 
     private void deleteAllItems() {
         mWordList.clear();
-        mWordList.addAll(mWordList);
+        mWordList.removeAll(mWordList);
+        mRecyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    private void initializeData() {
+        mWordList.clear();
+        for (int i = 0; i <= 20; i++)
+            mWordList.add("Word " + i);
         mRecyclerView.getAdapter().notifyDataSetChanged();
     }
 }
