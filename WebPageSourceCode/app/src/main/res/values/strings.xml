@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Web Page Source Code</string>
+    <string name="enter_url">Enter URL:</string>
+    <string name="get_page_source">Get Page Source</string>
+    <string name="page_source_will_appear_here">Page source will appear here</string>
+    <string name="enter_url_hint">Enter URL</string>
+
+    <string-array name="type">
+        <item>http://</item>
+        <item>https://</item>
+    </string-array>
+</resources>
