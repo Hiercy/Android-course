@@ -11,6 +11,7 @@ public class CustomReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String intentAction = intent.getAction();
+        int i = intent.getIntExtra("RandomNumber", -1);
         if (intentAction != null) {
             String message = "unknown intent action";
             switch (intentAction) {
@@ -23,9 +24,9 @@ public class CustomReceiver extends BroadcastReceiver {
                 case Intent.ACTION_HEADSET_PLUG:
                     message = "Wired Headset connected";
                     break;
-//                case ACTION_CUSTOM_BROADCAST:
-//                    message = "Custom Broadcast Received";
-//                    break;
+                case ACTION_CUSTOM_BROADCAST:
+                    message = "Custom Broadcast Received\nSquare of the Random number: " + i*i;
+                    break;
             }
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
         }
