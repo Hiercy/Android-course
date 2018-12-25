@@ -20,9 +20,12 @@ public class CustomReceiver extends BroadcastReceiver {
                 case Intent.ACTION_POWER_DISCONNECTED:
                     message = "Power disconnected!";
                     break;
-                case ACTION_CUSTOM_BROADCAST:
-                    message = "Custom Broadcast Received";
+                case Intent.ACTION_HEADSET_PLUG:
+                    message = "Wired Headset connected";
                     break;
+//                case ACTION_CUSTOM_BROADCAST:
+//                    message = "Custom Broadcast Received";
+//                    break;
             }
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
         }

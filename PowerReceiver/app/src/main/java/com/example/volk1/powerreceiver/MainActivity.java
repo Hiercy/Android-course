@@ -16,27 +16,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        IntentFilter filter = new IntentFilter();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
         filter.addAction(Intent.ACTION_POWER_CONNECTED);
         filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+        filter.addAction(Intent.ACTION_HEADSET_PLUG);
 
         // Register receiver
         this.registerReceiver(customReceiver, filter);
 
         // Register the receiver to receive custom broadcast.
-        LocalBroadcastManager.getInstance(this).registerReceiver(customReceiver, new IntentFilter(ACTION_CUSTOM_BROADCAST));
+//        LocalBroadcastManager.getInstance(this).registerReceiver(customReceiver, new IntentFilter(ACTION_CUSTOM_BROADCAST));
     }
 
     @Override
     protected void onDestroy() {
         this.unregisterReceiver(customReceiver);
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(customReceiver);
+//        LocalBroadcastManager.getInstance(this).unregisterReceiver(customReceiver);
         super.onDestroy();
     }
 
     public void sendCustomBroadcast(View view) {
-        Intent customBroadcast = new Intent(ACTION_CUSTOM_BROADCAST);
-
-        LocalBroadcastManager.getInstance(this).sendBroadcast(customBroadcast);
+//        Intent customBroadcast = new Intent(ACTION_CUSTOM_BROADCAST);
+//
+//        LocalBroadcastManager.getInstance(this).sendBroadcast(customBroadcast);
     }
 }
