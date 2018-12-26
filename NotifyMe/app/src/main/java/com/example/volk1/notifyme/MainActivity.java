@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     private NotificationCompat.Builder getNotificationBuilder(){
         Intent intent = new Intent(this, MainActivity.class);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -132,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         notifyBuilder.setContentIntent(pendingIntent);
         notifyBuilder.setAutoCancel(true);
         notifyBuilder.setDefaults(NotificationCompat.DEFAULT_ALL);
+        notifyBuilder.setDeleteIntent(pendingIntent);
 
         return notifyBuilder;
     }
