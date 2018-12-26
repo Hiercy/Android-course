@@ -6,8 +6,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -83,13 +81,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateNotification() {
-        Bitmap androidImage = BitmapFactory
-                .decodeResource(getResources(), R.drawable.mascot_1);
+//        Bitmap androidImage = BitmapFactory.decodeResource(getResources(), R.drawable.mascot_1);
 
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
-        notifyBuilder.setStyle(new NotificationCompat.BigPictureStyle()
-                .bigPicture(androidImage)
-                .setBigContentTitle("Notification Update\nOOOOOOOOOOO"));
+        notifyBuilder.setStyle(new NotificationCompat.InboxStyle()
+                .addLine("The first message")
+                .addLine("The second message")
+                .addLine("The third message")
+                .setBigContentTitle("Title")
+                .setSummaryText("+1 more"));
 
         mNotificationManager.notify(NOTIFICATION_ID, notifyBuilder.build());
 
@@ -126,9 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
                 .setContentTitle("AAAAAAAAAAAAAAAAAA")
-                .setContentText("This is notification text")
                 .setSmallIcon(R.drawable.ic_android)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setStyle(new NotificationCompat.InboxStyle()
+                    .addLine("The frist one")
+                    .addLine("The last one")
+                    .setSummaryText("+1 more"));
 
         notifyBuilder.setContentIntent(pendingIntent);
         notifyBuilder.setAutoCancel(true);
