@@ -9,8 +9,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "com.volk1.quiz.MainActivity";
+    private static final String KEY_INDEX = "currentQuestion";
 
     private Button mFalseButton;
     private Button mTrueButton;
@@ -28,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
             new Question(R.string.question_oceans, true)
     };
     private int currentIndex = 0;
+    private int score = 0;
+
+    private HashMap<Question, Boolean> anwered = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +55,18 @@ public class MainActivity extends AppCompatActivity {
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                anwered.put(questions[currentIndex], false);
                 checkAnswer(false);
+                isPressed(false, false);
             }
         });
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                anwered.put(questions[currentIndex], true);
                 checkAnswer(true);
+                isPressed(false, false);
             }
         });
 
@@ -71,12 +82,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 currentIndex = (currentIndex - 1) % questions.length;
+                if (currentIndex < 0) {
+                    currentIndex = questions.length - 1;
+                }
                 initData();
             }
         });
 
         if (savedInstanceState != null) {
-            currentIndex = savedInstanceState.getInt("currentQuestion");
+            currentIndex = savedInstanceState.getInt(KEY_INDEX);
+            anwered = (HashMap<Question, Boolean>) savedInstanceState.getSerializable("Answer");
+            anwered.clear();
             initData();
         }
     }
@@ -114,6 +130,12 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         int question = questions[currentIndex].getTextResID();
         mQuestionTextView.setText(question);
+
+        if (anwered.containsKey(questions[currentIndex])) {
+            isPressed(false, false);
+        } else {
+            isPressed(true, true);
+        }
     }
 
     private void checkAnswer(boolean userAnswer) {
@@ -121,17 +143,30 @@ public class MainActivity extends AppCompatActivity {
         int message = 0;
         if (userAnswer == answerIsTrue) {
             message = R.string.correct_answer;
+            score++;
         } else {
             message = R.string.incorrect_answer;
         }
         Toast.makeText(getApplicationContext(),
                 message,
                 Toast.LENGTH_SHORT).show();
+
+        if (currentIndex == questions.length - 1) {
+            Toast.makeText(getApplicationContext(),
+                    "Your score: " + score,
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("currentQuestion", currentIndex);
+        outState.putSerializable("Answer", anwered);
+        outState.putInt(KEY_INDEX, currentIndex);
+    }
+
+    private void isPressed(boolean buttonTrue, boolean buttonFalse) {
+        mTrueButton.setEnabled(buttonTrue);
+        mFalseButton.setEnabled(buttonFalse);
     }
 }

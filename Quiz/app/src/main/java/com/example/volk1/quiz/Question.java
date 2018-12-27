@@ -1,5 +1,8 @@
 package com.example.volk1.quiz;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Question {
 
     private int textResID;
@@ -22,7 +25,5 @@ public class Question {
         return isAnswerCorrect;
     }
 
-    public void setAnswerCorrect(boolean isAnswerCorrect) {
-        this.isAnswerCorrect = isAnswerCorrect;
-    }
+    public void setAnswerCorrect(boolean isAnswerCorrect) { this.isAnswerCorrect = isAnswerCorrect; }
 }
