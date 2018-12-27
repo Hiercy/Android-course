@@ -1,24 +1,24 @@
 package com.example.volk1.quiz;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "com.volk1.quiz.MainActivity";
 
     private Button mFalseButton;
     private Button mTrueButton;
 
-    private Button mNextButton;
-    private Button mPreviousButton;
+    private ImageButton mNextButton;
+    private ImageButton mPreviousButton;
 
-    private TextView mAnswerTextView;
+    private TextView mQuestionTextView;
 
     private Question[] questions = {
             new Question(R.string.question_africa, true),
@@ -32,15 +32,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate called!");
         setContentView(R.layout.activity_main);
 
         mFalseButton = findViewById(R.id.buttonFalse);
         mTrueButton = findViewById(R.id.buttonTrue);
 
         mNextButton = findViewById(R.id.buttonNext);
-        mPreviousButton = findViewById(R.id.buttonPervious);
+        mPreviousButton = findViewById(R.id.buttonPrevious);
 
-        mAnswerTextView = findViewById(R.id.answerTextView);
+        mQuestionTextView = findViewById(R.id.questionTextView);
 
         initData();
 
@@ -73,11 +74,46 @@ public class MainActivity extends AppCompatActivity {
                 initData();
             }
         });
+
+        if (savedInstanceState != null) {
+            currentIndex = savedInstanceState.getInt("currentQuestion");
+            initData();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart called!");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop called!");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy called!");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause called!");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume called!");
     }
 
     private void initData() {
         int question = questions[currentIndex].getTextResID();
-        mAnswerTextView.setText(question);
+        mQuestionTextView.setText(question);
     }
 
     private void checkAnswer(boolean userAnswer) {
@@ -91,5 +127,11 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),
                 message,
                 Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("currentQuestion", currentIndex);
     }
 }
