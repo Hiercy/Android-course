@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView seekBarProgress = findViewById(R.id.seekBarProgress);
 
+        mScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -47,19 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
     }
 
     public void scheduleJob(View view) {
-        mScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-
         RadioGroup radioGroup = findViewById(R.id.networkOptions);
 
         int selectNetwork = radioGroup.getCheckedRadioButtonId();

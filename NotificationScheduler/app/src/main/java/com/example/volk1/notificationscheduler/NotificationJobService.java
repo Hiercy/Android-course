@@ -7,10 +7,14 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
 
 public class NotificationJobService extends JobService {
+
     private static final String PRIMARY_CHANNEL_ID = "notify_channel";
 
     NotificationManager mNotificationManager;
@@ -35,12 +39,15 @@ public class NotificationJobService extends JobService {
                 .setAutoCancel(true);
 
         mNotificationManager.notify(0, builder.build());
-        return false;
+
+        new JobTask(this).execute(jobParameters);
+        return true;
     }
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        return true;
+        Toast.makeText(this, "Job Stopped: criteria not met", Toast.LENGTH_SHORT).show();
+        return false;
     }
 
     public void createNotificationChannel() {
@@ -59,6 +66,27 @@ public class NotificationJobService extends JobService {
             notificationChannel.setDescription("Notification from Job Service");
 
             mNotificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
+
+    class JobTask extends AsyncTask<JobParameters, Void, JobParameters> {
+
+        private final JobService jobService;
+
+        JobTask(JobService jobService) {
+            this.jobService = jobService;
+        }
+
+        @Override
+        protected void onPostExecute(JobParameters jobParameters) {
+            jobService.jobFinished(jobParameters, false);
+            Toast.makeText(jobService, "Task Finished", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected JobParameters doInBackground(JobParameters... jobParameters) {
+            SystemClock.sleep(5000);
+            return jobParameters[0];
         }
     }
 }
