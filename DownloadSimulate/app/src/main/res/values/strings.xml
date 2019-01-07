@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Download Simulate</string>
+    <string name="download_now">Download Now</string>
+    <string name="cancel">Cancel</string>
+</resources>
