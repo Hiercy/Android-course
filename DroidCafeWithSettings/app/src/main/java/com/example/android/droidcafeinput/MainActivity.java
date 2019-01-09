@@ -74,11 +74,10 @@ public class MainActivity extends AppCompatActivity {
         PreferenceManager.setDefaultValues(this, R.xml.pref_notification, false);
         PreferenceManager.setDefaultValues(this, R.xml.pref_account, false);
 
-        SharedPreferences sharedPref = PreferenceManager
-                .getDefaultSharedPreferences(this);
-        String marketPref = sharedPref
-                .getString("sync_frequency", "-1");
-        displayToast(marketPref);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String marketPref = sharedPref.getString("sync_frequency", "-1");
+        String choosen = sharedPref.getString("delivery_key", "Pick Up");
+        displayToast(marketPref + "... " + choosen);
     }
 
     /**

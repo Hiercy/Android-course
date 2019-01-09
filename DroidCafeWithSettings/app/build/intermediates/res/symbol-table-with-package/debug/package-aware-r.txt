@@ -28,6 +28,7 @@ animator mtrl_fab_transformation_sheet_expand_spec
 array list_preference_entries
 array list_preference_entry_values
 array multi_select_list_preference_default_value
+array pref_delivery_choose
 array pref_example_list_titles
 array pref_example_list_values
 array pref_market_titles
@@ -1426,6 +1427,7 @@ string path_password_strike_through
 string phone_label_string
 string pick_up
 string pref_default_display_name
+string pref_del_method
 string pref_description_social_recommendations
 string pref_header_account
 string pref_header_general

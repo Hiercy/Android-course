@@ -1,4 +1,4 @@
-#Wed Jan 09 11:48:22 MSK 2019
+#Wed Jan 09 14:48:56 MSK 2019
 base.0=C\:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\DroidCafeWithSettings\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

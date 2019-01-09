@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Jan 09 11:48:22 MSK 2019
+#Wed Jan 09 14:48:56 MSK 2019
 0.baseType=DIRECTORY
 0.base=C\:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\DroidCafeWithSettings\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 0.path=classes.dex
