@@ -9,12 +9,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextViewQuestion;
     private TextView mTextViewScore;
 
     private ProgressBar mProgressBar;
+
+    private AlertDialog.Builder mBuilder;
 
     private Questions[] mQuestions = {
             new Questions(R.string.question_1, true),
@@ -45,9 +49,19 @@ public class MainActivity extends AppCompatActivity {
         mTextViewScore = findViewById(R.id.score);
         mProgressBar = findViewById(R.id.progress);
 
-        currentQuestion = 0;
-        score = 0;
-        numberProgressBar = 1;
+        if (savedInstanceState != null) {
+            currentQuestion = savedInstanceState.getInt("currentQuestion");
+            score = savedInstanceState.getInt("score");
+            numberProgressBar = savedInstanceState.getInt("numberProgressBar");
+
+            mTextViewScore.setText("Score: " + score + "/13");
+
+            initDialog();
+        } else {
+            currentQuestion = 0;
+            score = 0;
+            numberProgressBar = 1;
+        }
     }
 
     public void answerFalse(View view) {
@@ -72,33 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         int quest = mQuestions[currentQuestion].getQuestion();
 
-        if (currentQuestion == 0) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder
-                    .setTitle("Game Over")
-                    .setMessage("Your score: " + score + ". Bye. Have a beautiful time!")
-                    .setCancelable(true)
-                    .setNegativeButton("Close app",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    System.exit(0);
-                                }
-                            })
-                    
-                    .setPositiveButton("Start again", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            score = 0;
-                            numberProgressBar = 1;
-
-                            mTextViewScore.setText("Score: " + score + "/13");
-                            mProgressBar.setProgress(score);
-                        }
-                    });
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-        }
+        initDialog();
         mTextViewQuestion.setText(quest);
     }
 
@@ -110,13 +98,52 @@ public class MainActivity extends AppCompatActivity {
         if (correctAns == userAnswer) {
             displayToast(R.string.correct_toast);
             score++;
-            StringBuilder stringBuilder = new StringBuilder();
-            mTextViewScore.setText(stringBuilder
-                    .append("Score: ")
-                    .append(score)
-                    .append("/13"));
+
+            mTextViewScore.setText("Score: " + score + "/13");
+
         } else {
             displayToast(R.string.incorrect_toast);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("score", score);
+        outState.putInt("currentQuestion", currentQuestion);
+        outState.putInt("numberProgressBar", numberProgressBar);
+    }
+
+    private void initDialog() {
+        if (currentQuestion == 0) {
+            mBuilder = new AlertDialog.Builder(MainActivity.this);
+
+            mBuilder
+                    .setTitle("Game Over")
+                    .setMessage("Your score: " + score + ". Bye. Have a beautiful time!")
+                    .setCancelable(true)
+                    .setNegativeButton("Close app",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    System.exit(0);
+                                }
+                            })
+
+                    .setPositiveButton("Start again", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            score = 0;
+                            numberProgressBar = 1;
+
+                            mTextViewScore.setText("Score: " + score + "/13");
+
+                            mProgressBar.setProgress(score);
+                        }
+                    });
+            AlertDialog alertDialog = mBuilder.create();
+            alertDialog.show();
         }
     }
 }
