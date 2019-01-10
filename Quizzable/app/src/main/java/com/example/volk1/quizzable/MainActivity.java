@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
         update();
     }
 
-    private void displayToast(String message) {
+    private void displayToast(int correct) {
         Toast.makeText(getApplicationContext(),
-                message,
+                correct,
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -82,9 +82,10 @@ public class MainActivity extends AppCompatActivity {
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    Runtime.getRuntime().exit(0);
+                                    System.exit(0);
                                 }
                             })
+                    
                     .setPositiveButton("Start again", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar.setProgress(numberProgressBar, true);
 
         if (correctAns == userAnswer) {
-            Toast.makeText(getApplicationContext(), "Thats right!", Toast.LENGTH_SHORT).show();
+            displayToast(R.string.correct_toast);
             score++;
             StringBuilder stringBuilder = new StringBuilder();
             mTextViewScore.setText(stringBuilder
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     .append(score)
                     .append("/13"));
         } else {
-            Toast.makeText(getApplicationContext(), "Incorrect", Toast.LENGTH_SHORT).show();
+            displayToast(R.string.incorrect_toast);
         }
     }
 }
