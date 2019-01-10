@@ -74,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (currentQuestion == 0) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setMessage("Your score: " + score + ". Bye. Have a beautiful time!")
+            builder
+                    .setTitle("Game Over")
+                    .setMessage("Your score: " + score + ". Bye. Have a beautiful time!")
                     .setCancelable(true)
                     .setNegativeButton("Close app",
                             new DialogInterface.OnClickListener() {
@@ -86,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("Start again", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            score = 0;
                             score = 0;
                             numberProgressBar = 1;
 
