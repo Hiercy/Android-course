@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mButtonA1;
     private Button mButtonA2;
-    
+
     int index = 0;
 
     @Override
