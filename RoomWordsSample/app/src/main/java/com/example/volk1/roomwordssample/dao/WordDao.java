@@ -3,6 +3,7 @@ package com.example.volk1.roomwordssample.dao;
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.example.volk1.roomwordssample.entity.Word;
@@ -11,7 +12,8 @@ import java.util.List;
 
 @Dao
 public interface WordDao {
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Word word);
 
     // @Delete
