@@ -6,7 +6,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/card_color">
 
         <TextView
             android:id="@+id/title"
@@ -15,7 +16,8 @@
             android:padding="8dp"
             android:text="@string/title"
             android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:id="@+id/question_subtitle"
@@ -23,7 +25,8 @@
             android:layout_height="wrap_content"
             android:text="@string/question_dedscription"
             android:padding="8dp"
-            android:layout_below="@+id/title"/>
+            android:layout_below="@+id/title"
+            android:textColor="@android:color/white"/>
 
     </RelativeLayout>
 

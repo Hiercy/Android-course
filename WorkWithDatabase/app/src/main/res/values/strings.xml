@@ -3,6 +3,9 @@
     <string name="action_settings">Settings</string>
     <string name="question_dedscription">Question dedscription</string>
     <string name="title">Title</string>
+    <string name="enter_title">Enter Title</string>
+    <string name="enter_question">Enter Question</string>
+    <string name="question">Question:</string>
 
     <string-array name="array_title">
         <item>Title One</item>

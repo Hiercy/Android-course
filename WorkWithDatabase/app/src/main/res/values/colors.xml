@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#3c6382</color>
+    <color name="colorPrimaryDark">#3c6382</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="bckg">#60a3bc</color>
+    <color name="bckg_main">#fad390</color>
+    <color name="card_color">#82ccdd</color>
+    <color name="false_answ">#e66767</color>
+    <color name="true_answ">#78e08f</color>
+    <color name="input_text">#ecf0f1</color>
 </resources>

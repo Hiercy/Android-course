@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/bckg"
     tools:context=".MainActivity">
 
     <android.support.v7.widget.RecyclerView
@@ -26,8 +27,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:layout_gravity="bottom|end"
-        android:onClick="newQuestion"
         android:src="@drawable/ic_add_black_24dp"
-        app:backgroundTint="@android:color/holo_orange_dark"/>
+        app:backgroundTint="@color/card_color"/>
 
 </RelativeLayout>
