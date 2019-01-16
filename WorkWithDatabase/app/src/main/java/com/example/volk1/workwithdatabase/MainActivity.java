@@ -2,15 +2,18 @@ package com.example.volk1.workwithdatabase;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new QuestionAdapter(this, mDataset);
         mRecyclerView.setAdapter(mAdapter);
 
+        touchHelper(gridColumnCount);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +58,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initData();
+    }
+
+    private void touchHelper(int gridColumnCount) {
+        int swipeDirs;
+        if (gridColumnCount > 1) {
+            swipeDirs = 0;
+        } else {
+            swipeDirs = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+        }
+
+        ItemTouchHelper itemTouchHelper =  new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT
+                        | ItemTouchHelper.DOWN | ItemTouchHelper.UP,  swipeDirs) {
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                final int from = viewHolder.getAdapterPosition();
+                final int toPos = target.getAdapterPosition();
+
+                Collections.swap(mDataset, from, toPos);
+                mAdapter.notifyItemMoved(from, toPos);
+
+                return true;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                mDataset.remove(viewHolder.getAdapterPosition());
+                mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+            }
+        });
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
