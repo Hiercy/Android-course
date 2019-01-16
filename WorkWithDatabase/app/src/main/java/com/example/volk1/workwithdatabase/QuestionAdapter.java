@@ -9,36 +9,52 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.volk1.workwithdatabase.roomDB.entity.Question;
+
+import java.util.List;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
 
     private Context mContext;
-    private ArrayList<Question> mQuestions;
+    private LayoutInflater mLayoutInflater;
+    private List<Question> mQuestions;
 
-    QuestionAdapter(Context context, ArrayList<Question> mQuestions) {
-        this.mContext = context;
-        this.mQuestions = mQuestions;
+    QuestionAdapter(Context context) {
+        mContext = context;
+        mLayoutInflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public QuestionAdapter.QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new QuestionViewHolder(LayoutInflater.from(mContext)
-                .inflate(R.layout.list_item, viewGroup, false));
+        View view = mLayoutInflater.inflate(R.layout.list_item, viewGroup, false);
+        return new QuestionViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull QuestionAdapter.QuestionViewHolder questionViewHolder, int i) {
-        // Get current question
-        final Question question = mQuestions.get(i);
+        if (mQuestions != null) {
+            Question current = mQuestions.get(i);
+            questionViewHolder.mTitle.setText(current.getTitle());
+            questionViewHolder.mDescription.setText(current.getQuestion());
+        } else {
+            questionViewHolder.mTitle.setText(R.string.no_title);
+            questionViewHolder.mDescription.setText(R.string.no_question);
+        }
+    }
 
-        questionViewHolder.bindTo(question);
+    void setQuestionList(List<Question> questionList) {
+        this.mQuestions = questionList;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return mQuestions.size();
+        if (mQuestions != null) {
+            return mQuestions.size();
+        } else {
+            return 0;
+        }
     }
 
     /*
@@ -58,18 +74,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             itemView.setOnClickListener(this);
         }
 
-        void bindTo(Question question) {
-            mTitle.setText(question.getTitle());
-            mDescription.setText(question.getQuestion());
-        }
-
         @Override
         public void onClick(View view) {
             Question question = mQuestions.get(getAdapterPosition());
 
             Intent intent = new Intent(mContext, DetailActivity.class);
 
-            intent.putExtra("title",question.getTitle());
+            intent.putExtra("title", question.getTitle());
             intent.putExtra("question", question.getQuestion());
 
             mContext.startActivity(intent);

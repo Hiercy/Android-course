@@ -6,6 +6,8 @@
     <string name="enter_title">Enter Title</string>
     <string name="enter_question">Enter Question</string>
     <string name="question">Question:</string>
+    <string name="no_title">No Title</string>
+    <string name="no_question">No Question</string>
 
     <string-array name="array_title">
         <item>Title One</item>
