@@ -52,7 +52,7 @@ public abstract class QuestionRoomDatabase extends RoomDatabase {
         String[] title = {"Title One", "Title Two", "Title Three"};
         String[] questions = {"Question One", "Question Two", "Question Three"};
 
-        public PopulateDbAsync(QuestionRoomDatabase instance) {
+        PopulateDbAsync(QuestionRoomDatabase instance) {
             mQuestionDao = instance.questionDao();
         }
 

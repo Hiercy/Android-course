@@ -9,10 +9,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.volk1.workwithdatabase.activities.NewQuestionActivity;
+import com.example.volk1.workwithdatabase.helper.ItemTouchHelperCallback;
 import com.example.volk1.workwithdatabase.roomDB.entity.Question;
 import com.example.volk1.workwithdatabase.view_model.QuestionViewModel;
 
@@ -44,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         // set Adapter
         mAdapter = new QuestionAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
+
+        ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(mAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

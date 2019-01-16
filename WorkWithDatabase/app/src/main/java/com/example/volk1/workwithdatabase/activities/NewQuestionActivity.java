@@ -1,8 +1,10 @@
-package com.example.volk1.workwithdatabase;
+package com.example.volk1.workwithdatabase.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.example.volk1.workwithdatabase.R;
 
 public class NewQuestionActivity extends AppCompatActivity {
 
