@@ -26,14 +26,14 @@ public class QuestionRepositry {
     }
 
     public void insert(Question question) {
-        new InsertAsyncTask(mQuestionDao).execute();
+        new InsertAsyncTask(mQuestionDao).execute(question);
     }
 
     private static class InsertAsyncTask extends AsyncTask<Question, Void, Void> {
 
         private QuestionDao mQuestionDao;
 
-        public InsertAsyncTask(QuestionDao questionDao) {
+        InsertAsyncTask(QuestionDao questionDao) {
             this.mQuestionDao = questionDao;
         }
 

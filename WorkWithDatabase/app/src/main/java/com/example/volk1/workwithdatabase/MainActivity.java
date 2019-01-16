@@ -13,17 +13,19 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.volk1.workwithdatabase.activities.NewQuestionActivity;
 import com.example.volk1.workwithdatabase.helper.ItemTouchHelperCallback;
 import com.example.volk1.workwithdatabase.roomDB.entity.Question;
+import com.example.volk1.workwithdatabase.roomDB.random_id.UniqueID;
 import com.example.volk1.workwithdatabase.view_model.QuestionViewModel;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-//    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    public static final int NEW_QUESTION_ACTIVITY_REQUEST_CODE = 1;
 
     private QuestionViewModel mQuestionViewModel;
 
@@ -52,16 +54,22 @@ public class MainActivity extends AppCompatActivity {
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(mRecyclerView);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab_add = findViewById(R.id.fab_add);
+        fab_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewQuestionActivity.class);
-                // TODO: change to startActivityForResult(intent, int);
-                startActivity(intent);
+                startActivityForResult(intent, NEW_QUESTION_ACTIVITY_REQUEST_CODE);
             }
         });
 
+        FloatingActionButton fab_restore = findViewById(R.id.fab_restore);
+        fab_restore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAdapter.restore();
+            }
+        });
         initData();
     }
 
@@ -94,5 +102,26 @@ public class MainActivity extends AppCompatActivity {
                 mAdapter.setQuestionList(questions);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        int id = UniqueID.getID();
+
+        if (requestCode == NEW_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Question question = new Question(
+                    id,
+                    data.getStringExtra(NewQuestionActivity.REPLY_TITLE),
+                    data.getStringExtra(NewQuestionActivity.REPLY_DESC));
+
+            mQuestionViewModel.insert(question);
+        } else {
+            Toast.makeText(
+                    getApplicationContext(),
+                    R.string.empty_not_saved,
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }

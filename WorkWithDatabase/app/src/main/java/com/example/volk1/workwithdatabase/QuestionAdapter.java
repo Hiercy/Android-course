@@ -74,6 +74,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         notifyItemRemoved(position);
     }
 
+    public void restore() {
+        int size = mQuestions.size();
+        for (int i  = 0; i < size; i++) {
+           mQuestions.remove(i);
+           notifyItemRemoved(i);
+        }
+    }
+
     /*
      *                     ===================== VIEW HOLDER ==================
      */

@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/new_question_desc"
+        android:id="@+id/textView_new_question_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/question"
@@ -43,6 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/new_question_title"/>
 
     <EditText
+        android:id="@+id/editText_new_question_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -51,20 +52,20 @@
         android:inputType="text|textMultiLine"
         android:textColor="@color/input_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/new_question_desc"
+        app:layout_constraintStart_toEndOf="@+id/textView_new_question_desc"
         app:layout_constraintTop_toBottomOf="@+id/editText_title" />
 
     <Button
+        android:id="@+id/create_new_question"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/card_color"
-        android:text="Create new Question"
+        android:shadowColor="@android:color/black"
+        android:text="@string/create_new_question"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:onClick="addNewQuestion"
-        android:shadowColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
