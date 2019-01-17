@@ -58,12 +58,14 @@ public abstract class QuestionRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mQuestionDao.deleteAll();
 
-            for (int i = 0; i <= title.length - 1; i++) {
-                int id = UniqueID.getID();
-                Question question = new Question(id, title[i], questions[i], answer[i]);
-                mQuestionDao.insert(question);
+            // If we have no words, then create the initial list of words
+            if (mQuestionDao.getSingleQuestion().length < 1) {
+                for (int i = 0; i <= title.length - 1; i++) {
+                    int id = UniqueID.getID();
+                    Question question = new Question(id, title[i], questions[i], answer[i]);
+                    mQuestionDao.insert(question);
+                }
             }
             return null;
         }

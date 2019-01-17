@@ -29,6 +29,14 @@ public class QuestionRepositry {
         new InsertAsyncTask(mQuestionDao).execute(question);
     }
 
+    public void deleteAll() {
+        new deleteAllQuestionAsyncTask(mQuestionDao).execute();
+    }
+
+    public void deleteSingleQuestion(Question question) {
+        new deleteSingleQuestionAsyncTask(mQuestionDao).execute(question);
+    }
+
     private static class InsertAsyncTask extends AsyncTask<Question, Void, Void> {
 
         private QuestionDao mQuestionDao;
@@ -40,6 +48,36 @@ public class QuestionRepositry {
         @Override
         protected Void doInBackground(Question... questions) {
             mQuestionDao.insert(questions[0]);
+            return null;
+        }
+    }
+
+    private static class deleteAllQuestionAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private QuestionDao mQuestionDao;
+
+        deleteAllQuestionAsyncTask(QuestionDao questionDao) {
+            mQuestionDao = questionDao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mQuestionDao.deleteAll();
+            return null;
+        }
+    }
+
+    private static class deleteSingleQuestionAsyncTask extends AsyncTask<Question, Void, Void> {
+
+        private QuestionDao mQuestionDao;
+
+        deleteSingleQuestionAsyncTask(QuestionDao questionDao) {
+            mQuestionDao = questionDao;
+        }
+
+        @Override
+        protected Void doInBackground(Question... questions) {
+            mQuestionDao.deleteQuestion(questions[0]);
             return null;
         }
     }

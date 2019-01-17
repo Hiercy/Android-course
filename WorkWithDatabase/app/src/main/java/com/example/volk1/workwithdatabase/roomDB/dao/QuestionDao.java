@@ -2,6 +2,7 @@ package com.example.volk1.workwithdatabase.roomDB.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -21,5 +22,11 @@ public interface QuestionDao {
 
     @Query("SELECT * FROM question_list ORDER BY question, title ASC")
     LiveData<List<Question>> getAllQuestions();
+
+    @Query("SELECT * FROM question_list LIMIT 1")
+    Question[] getSingleQuestion();
+
+    @Delete
+    void deleteQuestion(Question question);
 
 }

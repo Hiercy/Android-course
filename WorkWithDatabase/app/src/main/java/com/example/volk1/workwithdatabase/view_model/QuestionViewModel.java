@@ -30,4 +30,12 @@ public class QuestionViewModel extends AndroidViewModel {
         mQuestionRepositry.insert(question);
     }
 
+    public void deleteAll() {
+        mQuestionRepositry.deleteAll();
+    }
+
+    public void deleteQuestion(Question question) {
+        mQuestionRepositry.deleteSingleQuestion(question);
+    }
+
 }

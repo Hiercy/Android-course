@@ -10,14 +10,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.volk1.workwithdatabase.activities.DetailActivity;
-import com.example.volk1.workwithdatabase.helper.ItemTouchHelperAdapter;
 import com.example.volk1.workwithdatabase.roomDB.entity.Question;
 
-import java.util.Collections;
 import java.util.List;
 
-public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>
-        implements ItemTouchHelperAdapter {
+public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
@@ -61,17 +58,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         }
     }
 
-    @Override
-    public boolean onItemMoved(int from, int to) {
-        Collections.swap(mQuestions, from, to);
-        notifyItemMoved(from, to);
-        return true;
-    }
-
-    @Override
-    public void onItemDismiss(int position) {
-        mQuestions.remove(position);
-        notifyItemRemoved(position);
+    public Question getQuestionAtPosition(int pos) {
+        return mQuestions.get(pos);
     }
 
     /*

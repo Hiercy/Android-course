@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.volk1.workwithdatabase.activities.NewQuestionActivity;
-import com.example.volk1.workwithdatabase.helper.ItemTouchHelperCallback;
 import com.example.volk1.workwithdatabase.roomDB.entity.Question;
 import com.example.volk1.workwithdatabase.roomDB.random_id.UniqueID;
 import com.example.volk1.workwithdatabase.view_model.QuestionViewModel;
@@ -31,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     private QuestionAdapter mAdapter;
 
+    private RecyclerView mRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         mQuestionViewModel = ViewModelProviders.of(this).get(QuestionViewModel.class);
 
-        RecyclerView mRecyclerView = findViewById(R.id.my_recycler_view);
+        mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         // LinearLayout manager
@@ -50,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new QuestionAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(mAdapter);
-        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-        touchHelper.attachToRecyclerView(mRecyclerView);
+        // ItemTouchHelper
+        touchHelper();
 
         FloatingActionButton fab_add = findViewById(R.id.fab_add);
         fab_add.setOnClickListener(new View.OnClickListener() {
@@ -67,10 +67,9 @@ public class MainActivity extends AppCompatActivity {
         fab_restore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: delete all question excepy default
-                Toast.makeText(getApplicationContext(),
-                        "It will delete all question except default cards",
-                        Toast.LENGTH_SHORT).show();
+                displayToast("Clearing the questions...");
+
+                mQuestionViewModel.deleteAll();
             }
         });
         initData();
@@ -127,5 +126,36 @@ public class MainActivity extends AppCompatActivity {
                     R.string.empty_not_saved,
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void touchHelper() {
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                                         int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        Question question = mAdapter.getQuestionAtPosition(position);
+                        displayToast("Deleting " + question.getTitle());
+
+                        // Delete the word
+                        mQuestionViewModel.deleteQuestion(question);
+                    }
+                });
+        helper.attachToRecyclerView(mRecyclerView);
+    }
+
+    private void displayToast(String message) {
+        Toast.makeText(getApplicationContext(),
+                message,
+                Toast.LENGTH_SHORT).show();
     }
 }
