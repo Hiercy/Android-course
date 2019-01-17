@@ -59,11 +59,14 @@ public abstract class WordRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             // Start the app with a clean database every time.
-            wordDao.deleteAll();
+//            wordDao.deleteAll();
 
-            for (int i = 0; i <= words.length - 1; i++) {
-                Word word = new Word(words[i]);
-                wordDao.insert(word);
+            // If we have no words, then create the initial list of words
+            if (wordDao.getAnyWord().length < 1) {
+                for (int i = 0; i <= words.length - 1; i++) {
+                    Word word = new Word(words[i]);
+                    wordDao.insert(word);
+                }
             }
             return null;
         }

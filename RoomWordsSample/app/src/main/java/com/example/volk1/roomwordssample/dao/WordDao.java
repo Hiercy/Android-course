@@ -2,6 +2,7 @@ package com.example.volk1.roomwordssample.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -20,6 +21,9 @@ public interface WordDao {
     @Query("DELETE FROM word_list")
     void deleteAll();
 
+    @Delete
+    void deleteWord(Word word);
+
     /*
         LiveData, which is a lifecycle library class for data observation,
         can help your app respond to data changes.
@@ -28,4 +32,7 @@ public interface WordDao {
      */
     @Query("SELECT * FROM word_list ORDER BY word ASC")
     LiveData<List<Word>> getAllWord();
+
+    @Query("SELECT * FROM word_list LIMIT 1")
+    Word[] getAnyWord();
 }

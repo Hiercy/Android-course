@@ -52,11 +52,24 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         }
     }
 
-    public class WordViewHolder extends RecyclerView.ViewHolder {
+    /**
+     * Get the word at a given position.
+     * This method is useful for identifying which word
+     * was clicked or swiped in methods that handle user events.
+     *
+     * @param position
+     * @return The word at the given position
+     */
+    public Word getWordAtPosition(int position) {
+        return mWordList.get(position);
+    }
+
+
+    class WordViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView wordItemList;
 
-        public WordViewHolder(@NonNull View itemView) {
+        WordViewHolder(@NonNull View itemView) {
             super(itemView);
             wordItemList = itemView.findViewById(R.id.textView);
         }

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +56,31 @@ public class MainActivity extends AppCompatActivity {
                 wordListAdapter.setWordList(words);
             }
         });
+
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                                         int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        Word myWord = wordListAdapter.getWordAtPosition(position);
+                        Toast.makeText(MainActivity.this, "Deleting " +
+                                myWord.getWord(), Toast.LENGTH_LONG).show();
+
+                        // Delete the word
+                        mWordViewModel.deleteWord(myWord);
+                    }
+                });
+
+        helper.attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -72,7 +98,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         // noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.clear_data) {
+            Toast.makeText(this, "Clearing the data...",
+                    Toast.LENGTH_SHORT).show();
+
+            mWordViewModel.deleteAll();
             return true;
         }
 
