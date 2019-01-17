@@ -12,7 +12,7 @@ import com.example.volk1.workwithdatabase.roomDB.dao.QuestionDao;
 import com.example.volk1.workwithdatabase.roomDB.entity.Question;
 import com.example.volk1.workwithdatabase.roomDB.random_id.UniqueID;
 
-@Database(entities = {Question.class}, version = 1, exportSchema = false)
+@Database(entities = {Question.class}, version = 2, exportSchema = false)
 public abstract class QuestionRoomDatabase extends RoomDatabase {
 
     public abstract QuestionDao questionDao();
@@ -44,13 +44,13 @@ public abstract class QuestionRoomDatabase extends RoomDatabase {
         }
     };
 
-
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final QuestionDao mQuestionDao;
 
         String[] title = {"Title One", "Title Two", "Title Three"};
         String[] questions = {"Question One", "Question Two", "Question Three"};
+        String[] answer = {"Answer One", "Answer Two", "Answer Three"};
 
         PopulateDbAsync(QuestionRoomDatabase instance) {
             mQuestionDao = instance.questionDao();
@@ -62,7 +62,7 @@ public abstract class QuestionRoomDatabase extends RoomDatabase {
 
             for (int i = 0; i <= title.length - 1; i++) {
                 int id = UniqueID.getID();
-                Question question = new Question(id, title[i], questions[i]);
+                Question question = new Question(id, title[i], questions[i], answer[i]);
                 mQuestionDao.insert(question);
             }
             return null;

@@ -9,15 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.volk1.workwithdatabase.R;
-import com.example.volk1.workwithdatabase.roomDB.random_id.UniqueID;
 
 public class NewQuestionActivity extends AppCompatActivity {
 
     public static final String REPLY_TITLE = "title";
     public static final String REPLY_DESC = "desc";
+    public static final String REPLY_ANSWER = "answer";
 
     private EditText mEditTextTitle;
-    private EditText mEditTextDiscription;
+    private EditText mEditTextDescription;
+    private EditText mEditTextAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +26,33 @@ public class NewQuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_question);
 
         mEditTextTitle = findViewById(R.id.editText_title);
-        mEditTextDiscription = findViewById(R.id.editText_new_question_desc);
+        mEditTextDescription = findViewById(R.id.editText_new_question_desc);
+        mEditTextAnswer = findViewById(R.id.editText_new_answer);
 
         Button button = findViewById(R.id.create_new_question);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
-                if (TextUtils.isEmpty(mEditTextTitle.getText()) || TextUtils.isEmpty(mEditTextDiscription.getText())) {
+
+                String title = mEditTextTitle.getText().toString().replaceAll("\\s+", " ").trim();
+                String questionDesc = mEditTextDescription.getText().toString().replaceAll("\\s+", " ").trim();
+                String answer = mEditTextAnswer.getText().toString().replaceAll("\\s+", " ").trim();
+
+                if (TextUtils.isEmpty(title)
+                        || TextUtils.isEmpty(questionDesc)
+                        || TextUtils.isEmpty(answer)) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
-                    String title = mEditTextTitle.getText().toString();
-                    String questionDesc = mEditTextDiscription.getText().toString();
+                    if (title.equals("") || questionDesc.equals("") || answer.equals("")) {
+                        setResult(RESULT_CANCELED, replyIntent);
+                    } else {
+                        replyIntent.putExtra(REPLY_TITLE, title);
+                        replyIntent.putExtra(REPLY_DESC, questionDesc);
+                        replyIntent.putExtra(REPLY_ANSWER, answer);
 
-                    replyIntent.putExtra(REPLY_TITLE, title);
-                    replyIntent.putExtra(REPLY_DESC, questionDesc);
-
-                    setResult(RESULT_OK, replyIntent);
+                        setResult(RESULT_OK, replyIntent);
+                    }
                 }
                 finish();
             }

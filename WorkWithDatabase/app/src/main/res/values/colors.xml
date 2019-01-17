@@ -10,4 +10,5 @@
     <color name="false_answ">#e66767</color>
     <color name="true_answ">#78e08f</color>
     <color name="input_text">#ecf0f1</color>
+    <color name="check_btn">#079992</color>
 </resources>

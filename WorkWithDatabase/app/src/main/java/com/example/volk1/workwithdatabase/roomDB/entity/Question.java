@@ -21,10 +21,15 @@ public class Question {
     @ColumnInfo(name = "question")
     private String question;
 
-    public Question(@NonNull  int ID, @NonNull String title, @NonNull String question) {
+    @NonNull
+    @ColumnInfo(name = "answer")
+    private String answer;
+
+    public Question(@NonNull  int ID, @NonNull String title, @NonNull String question, @NonNull String answer) {
         this.ID = ID;
         this.title = title;
         this.question = question;
+        this.answer = answer;
     }
 
     public int getID() {
@@ -37,5 +42,9 @@ public class Question {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getAnswer() {
+        return answer;
     }
 }

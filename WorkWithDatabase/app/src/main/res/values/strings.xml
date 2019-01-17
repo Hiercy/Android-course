@@ -10,6 +10,10 @@
     <string name="no_question">No Question</string>
     <string name="create_new_question">Create new Question</string>
     <string name="empty_not_saved">Something went wrong</string>
+    <string name="answer">Answer:</string>
+    <string name="enter_answer">Enter Answer</string>
+    <string name="check">Check</string>
+    <string name="enter_your_answer">Enter your answer</string>
 
     <string-array name="array_title">
         <item>Title One</item>

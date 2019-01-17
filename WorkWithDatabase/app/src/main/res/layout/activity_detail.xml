@@ -30,34 +30,33 @@
             android:textSize="18sp"
             android:textColor="@android:color/white"/>
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="12dp"
             android:layout_below="@+id/detail_question_description"
-            android:layout_marginTop="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/check_answer"
+            android:hint="@string/enter_your_answer"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/check_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_below="@+id/detail_question_description"
+            android:layout_alignParentEnd="true"
+            android:text="@string/check"
+            android:textColor="@android:color/white"
+            android:background="@color/check_btn"
+            android:layout_marginBottom="43dp" />
 
-            <Button
-                android:id="@+id/answer_one"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="True"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:background="@color/true_answ"/>
-
-            <Button
-                android:id="@+id/answer_two"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="False"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:background="@color/false_answ"/>
-
-        </LinearLayout>
     </RelativeLayout>
 </ScrollView>

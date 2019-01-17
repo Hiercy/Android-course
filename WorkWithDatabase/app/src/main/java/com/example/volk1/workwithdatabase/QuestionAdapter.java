@@ -74,14 +74,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         notifyItemRemoved(position);
     }
 
-    public void restore() {
-        int size = mQuestions.size();
-        for (int i  = 0; i < size; i++) {
-           mQuestions.remove(i);
-           notifyItemRemoved(i);
-        }
-    }
-
     /*
      *                     ===================== VIEW HOLDER ==================
      */
@@ -107,6 +99,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
             intent.putExtra("title", question.getTitle());
             intent.putExtra("question", question.getQuestion());
+            intent.putExtra("answer", question.getAnswer());
 
             mContext.startActivity(intent);
         }

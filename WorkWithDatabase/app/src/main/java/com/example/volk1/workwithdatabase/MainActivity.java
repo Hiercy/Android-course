@@ -67,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
         fab_restore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAdapter.restore();
+                // TODO: delete all question excepy default
+                Toast.makeText(getApplicationContext(),
+                        "It will delete all question except default cards",
+                        Toast.LENGTH_SHORT).show();
             }
         });
         initData();
@@ -114,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
             Question question = new Question(
                     id,
                     data.getStringExtra(NewQuestionActivity.REPLY_TITLE),
-                    data.getStringExtra(NewQuestionActivity.REPLY_DESC));
+                    data.getStringExtra(NewQuestionActivity.REPLY_DESC),
+                    data.getStringExtra(NewQuestionActivity.REPLY_ANSWER));
 
             mQuestionViewModel.insert(question);
         } else {
