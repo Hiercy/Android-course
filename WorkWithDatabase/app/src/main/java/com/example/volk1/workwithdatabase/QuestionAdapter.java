@@ -3,11 +3,13 @@ package com.example.volk1.workwithdatabase;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.volk1.workwithdatabase.activities.DetailActivity;
 import com.example.volk1.workwithdatabase.roomDB.entity.Question;
@@ -67,15 +69,26 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
      */
     public class QuestionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        private ShowBottomSheetDialogFragement mBottomSheetDialogFragment;
+
         private TextView mTitle;
         private TextView mDescription;
 
         QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            mBottomSheetDialogFragment = new ShowBottomSheetDialogFragement();
+
             mTitle = itemView.findViewById(R.id.title);
             mDescription = itemView.findViewById(R.id.question_subtitle);
 
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    mBottomSheetDialogFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), "show_dialog_fragment");
+                    return true;
+                }
+            });
             itemView.setOnClickListener(this);
         }
 
@@ -91,5 +104,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
             mContext.startActivity(intent);
         }
+
+
     }
 }

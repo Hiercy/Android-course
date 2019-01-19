@@ -14,6 +14,8 @@
     <string name="enter_answer">Enter Answer</string>
     <string name="check">Check</string>
     <string name="enter_your_answer">Enter your answer</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
 
     <string-array name="array_title">
         <item>Title One</item>

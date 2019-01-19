@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 public class Question {
 
     @NonNull
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "question_id")
     private int ID;
 
@@ -25,7 +25,7 @@ public class Question {
     @ColumnInfo(name = "answer")
     private String answer;
 
-    public Question(@NonNull  int ID, @NonNull String title, @NonNull String question, @NonNull String answer) {
+    public Question( int ID, @NonNull String title, @NonNull String question, @NonNull String answer) {
         this.ID = ID;
         this.title = title;
         this.question = question;

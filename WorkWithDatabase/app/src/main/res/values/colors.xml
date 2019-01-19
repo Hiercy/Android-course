@@ -11,4 +11,5 @@
     <color name="true_answ">#78e08f</color>
     <color name="input_text">#ecf0f1</color>
     <color name="check_btn">#079992</color>
+    <color name="red_for_delete">#df4f39</color>
 </resources>

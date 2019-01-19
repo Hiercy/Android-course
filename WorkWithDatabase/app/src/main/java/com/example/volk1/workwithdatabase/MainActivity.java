@@ -17,12 +17,11 @@ import android.widget.Toast;
 
 import com.example.volk1.workwithdatabase.activities.NewQuestionActivity;
 import com.example.volk1.workwithdatabase.roomDB.entity.Question;
-import com.example.volk1.workwithdatabase.roomDB.random_id.UniqueID;
 import com.example.volk1.workwithdatabase.view_model.QuestionViewModel;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ShowBottomSheetDialogFragement.BottomSheetListener {
 
     public static final int NEW_QUESTION_ACTIVITY_REQUEST_CODE = 1;
 
@@ -110,9 +109,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        int id = UniqueID.getID();
-
         if (requestCode == NEW_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(NewQuestionActivity.REPLY_ID, -1);
             Question question = new Question(
                     id,
                     data.getStringExtra(NewQuestionActivity.REPLY_TITLE),
@@ -157,5 +155,10 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),
                 message,
                 Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onButtonClicked(String text) {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
 }

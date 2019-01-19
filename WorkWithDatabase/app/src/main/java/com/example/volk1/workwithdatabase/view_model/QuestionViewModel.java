@@ -37,5 +37,4 @@ public class QuestionViewModel extends AndroidViewModel {
     public void deleteQuestion(Question question) {
         mQuestionRepositry.deleteSingleQuestion(question);
     }
-
 }

@@ -12,6 +12,7 @@ import com.example.volk1.workwithdatabase.R;
 
 public class NewQuestionActivity extends AppCompatActivity {
 
+    public static final String REPLY_ID = "id";
     public static final String REPLY_TITLE = "title";
     public static final String REPLY_DESC = "desc";
     public static final String REPLY_ANSWER = "answer";
@@ -24,6 +25,8 @@ public class NewQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_question);
+
+        final int id = -1;
 
         mEditTextTitle = findViewById(R.id.editText_title);
         mEditTextDescription = findViewById(R.id.editText_new_question_desc);
@@ -47,6 +50,7 @@ public class NewQuestionActivity extends AppCompatActivity {
                     if (title.equals("") || questionDesc.equals("") || answer.equals("")) {
                         setResult(RESULT_CANCELED, replyIntent);
                     } else {
+                        replyIntent.putExtra(REPLY_ID, id);
                         replyIntent.putExtra(REPLY_TITLE, title);
                         replyIntent.putExtra(REPLY_DESC, questionDesc);
                         replyIntent.putExtra(REPLY_ANSWER, answer);

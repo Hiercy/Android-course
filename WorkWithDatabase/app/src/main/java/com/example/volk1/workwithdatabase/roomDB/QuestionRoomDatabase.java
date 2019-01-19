@@ -10,9 +10,8 @@ import android.support.annotation.NonNull;
 
 import com.example.volk1.workwithdatabase.roomDB.dao.QuestionDao;
 import com.example.volk1.workwithdatabase.roomDB.entity.Question;
-import com.example.volk1.workwithdatabase.roomDB.random_id.UniqueID;
 
-@Database(entities = {Question.class}, version = 2, exportSchema = false)
+@Database(entities = {Question.class}, version = 3, exportSchema = false)
 public abstract class QuestionRoomDatabase extends RoomDatabase {
 
     public abstract QuestionDao questionDao();
@@ -62,7 +61,7 @@ public abstract class QuestionRoomDatabase extends RoomDatabase {
             // If we have no words, then create the initial list of words
             if (mQuestionDao.getSingleQuestion().length < 1) {
                 for (int i = 0; i <= title.length - 1; i++) {
-                    int id = UniqueID.getID();
+                    int id = 0;
                     Question question = new Question(id, title[i], questions[i], answer[i]);
                     mQuestionDao.insert(question);
                 }
