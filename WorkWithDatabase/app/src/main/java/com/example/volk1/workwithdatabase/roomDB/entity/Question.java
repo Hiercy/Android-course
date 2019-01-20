@@ -2,6 +2,7 @@ package com.example.volk1.workwithdatabase.roomDB.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -25,7 +26,14 @@ public class Question {
     @ColumnInfo(name = "answer")
     private String answer;
 
-    public Question( int ID, @NonNull String title, @NonNull String question, @NonNull String answer) {
+    public Question(@NonNull String title, @NonNull String question, @NonNull String answer) {
+        this.title = title;
+        this.question = question;
+        this.answer = answer;
+    }
+
+    @Ignore
+    public Question(int ID, @NonNull String title, @NonNull String question, @NonNull String answer) {
         this.ID = ID;
         this.title = title;
         this.question = question;
@@ -34,6 +42,10 @@ public class Question {
 
     public int getID() {
         return  ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getQuestion() {

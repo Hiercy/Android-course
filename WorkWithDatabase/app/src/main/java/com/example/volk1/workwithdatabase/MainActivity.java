@@ -21,9 +21,15 @@ import com.example.volk1.workwithdatabase.view_model.QuestionViewModel;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ShowBottomSheetDialogFragement.BottomSheetListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final int NEW_QUESTION_ACTIVITY_REQUEST_CODE = 1;
+    public static final int UPDATE_QUESTION_ACTIVITY_REQUEST_CODE = 2;
+
+    public static final String EXTRA_DATA_UPDATE_TITLE = "extra_title_to_be_updated";
+    public static final String EXTRA_DATA_UPDATE_QUESTION = "extra_question_to_be_updated";
+    public static final String EXTRA_DATA_UPDATE_ANSWER = "extra_answer_to_be_updated";
+    public static final String EXTRA_DATA_UPDATE_ID = "extra_id_to_be_updated";
 
     private QuestionViewModel mQuestionViewModel;
 
@@ -37,6 +43,13 @@ public class MainActivity extends AppCompatActivity implements ShowBottomSheetDi
         setContentView(R.layout.activity_main);
 
         mQuestionViewModel = ViewModelProviders.of(this).get(QuestionViewModel.class);
+
+        mQuestionViewModel.getAllQuestion().observe(this, new Observer<List<Question>>() {
+            @Override
+            public void onChanged(@Nullable List<Question> questions) {
+                mAdapter.setQuestionList(questions);
+            }
+        });
 
         mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -69,6 +82,14 @@ public class MainActivity extends AppCompatActivity implements ShowBottomSheetDi
                 displayToast("Clearing the questions...");
 
                 mQuestionViewModel.deleteAll();
+            }
+        });
+
+        mAdapter.setOnItemClickListener(new QuestionAdapter.ClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Question question = mAdapter.getQuestionAtPosition(position);
+                launchUpdateQuestionActivity(question);
             }
         });
         initData();
@@ -110,15 +131,29 @@ public class MainActivity extends AppCompatActivity implements ShowBottomSheetDi
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            int id = data.getIntExtra(NewQuestionActivity.REPLY_ID, -1);
             Question question = new Question(
-                    id,
                     data.getStringExtra(NewQuestionActivity.REPLY_TITLE),
                     data.getStringExtra(NewQuestionActivity.REPLY_DESC),
                     data.getStringExtra(NewQuestionActivity.REPLY_ANSWER));
 
             mQuestionViewModel.insert(question);
-        } else {
+        } else if (requestCode == UPDATE_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            String title_date = data.getStringExtra(NewQuestionActivity.REPLY_TITLE);
+            String question_data = data.getStringExtra(NewQuestionActivity.REPLY_DESC);
+            String answer_date = data.getStringExtra(NewQuestionActivity.REPLY_ANSWER);
+            int id = data.getIntExtra(NewQuestionActivity.REPLY_ID, -1);
+
+            if (id != -1) {
+                mQuestionViewModel.update(new Question(
+                        id,
+                        title_date,
+                        question_data,
+                        answer_date));
+            } else {
+                displayToast("unable to update");
+            }
+        }
+        else {
             Toast.makeText(
                     getApplicationContext(),
                     R.string.empty_not_saved,
@@ -157,8 +192,14 @@ public class MainActivity extends AppCompatActivity implements ShowBottomSheetDi
                 Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onButtonClicked(String text) {
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+    public void launchUpdateQuestionActivity(Question question) {
+        Intent intent = new Intent(this, NewQuestionActivity.class);
+
+        intent.putExtra(EXTRA_DATA_UPDATE_TITLE, question.getTitle());
+        intent.putExtra(EXTRA_DATA_UPDATE_QUESTION, question.getQuestion());
+        intent.putExtra(EXTRA_DATA_UPDATE_ANSWER, question.getAnswer());
+        intent.putExtra(EXTRA_DATA_UPDATE_ID, question.getID());
+
+        startActivityForResult(intent, UPDATE_QUESTION_ACTIVITY_REQUEST_CODE);
     }
 }
