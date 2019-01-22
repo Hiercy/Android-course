@@ -14,7 +14,6 @@ import android.widget.TextView;
 public class SelectCityActivity extends AppCompatActivity {
 
     private EditText mEditText;
-    private ImageButton mImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class SelectCityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_city);
 
         mEditText = findViewById(R.id.choose_a_city);
-        mImageButton = findViewById(R.id.back);
+        ImageButton mImageButton = findViewById(R.id.back);
 
         mEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -32,7 +31,6 @@ public class SelectCityActivity extends AppCompatActivity {
                     String city = mEditText.getText().toString();
 
                     Intent intent = new Intent();
-
                     intent.putExtra("city", city);
 
                     setResult(Activity.RESULT_OK, intent);

@@ -27,8 +27,9 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
-private static final String TAG = "Weather";
+    private static final String TAG = "Weather";
 
+    String city;
 
     private final int REQUEST = 123;
 
@@ -40,29 +41,24 @@ private static final String TAG = "Weather";
     // Distance between location updates
     float MIN_DISTANCE = 1000;
 
-    String LOCATION_PROVIDER = LocationManager.GPS_PROVIDER;
-
-    private ImageButton mButtonChangeCity;
+    String LOCATION_PROVIDER = LocationManager.NETWORK_PROVIDER;
 
     private TextView mTextViewDegree;
     private TextView mTextViewCountry;
-    private TextView mTextViewStatus;
 
     private ImageView mImageViewStatusImage;
 
     LocationManager mLocationManager;
     LocationListener mLocationListener;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mButtonChangeCity = findViewById(R.id.change_city);
+        ImageButton mButtonChangeCity = findViewById(R.id.change_city);
         mTextViewDegree = findViewById(R.id.degree);
         mTextViewCountry = findViewById(R.id.country);
-        mTextViewStatus = findViewById(R.id.status_textView);
         mImageViewStatusImage = findViewById(R.id.status_image);
 
         mButtonChangeCity.setOnClickListener(new View.OnClickListener() {
@@ -76,17 +72,35 @@ private static final String TAG = "Weather";
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (data != null) {
-            String city = data.getStringExtra("city");
-            mTextViewCountry.setText(city);
+        if (data != null && resultCode == RESULT_OK) {
+            city = data.getStringExtra("city");
+            getWeatherForSpecificCity(city);
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if (city == null) {
+            getWeatherForCurrentLocation();
+        }
+    }
 
-        getWeatherForCurrentLocation();
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mLocationManager != null) {
+            mLocationManager.removeUpdates(mLocationListener);
+        }
+    }
+
+    private void getWeatherForSpecificCity(String city) {
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("q", city);
+        requestParams.put("appid", APP_ID);
+
+        letsDoSomeNetworking(requestParams);
     }
 
     private void getWeatherForCurrentLocation() {
@@ -96,13 +110,8 @@ private static final String TAG = "Weather";
         mLocationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                Log.d(TAG, "onLocationChanged() called");
-
                 String longitude = String.valueOf(location.getLongitude());
                 String latitude = String.valueOf(location.getLatitude());
-
-                Log.d(TAG, "longitude is: " + longitude);
-                Log.d(TAG, "latitude is: " + latitude);
 
                 RequestParams requestParams = new RequestParams();
                 requestParams.put("lon", longitude);
@@ -151,9 +160,8 @@ private static final String TAG = "Weather";
         asyncHttpClient.get(OPEN_WEATHER, requestParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.d(TAG, "Success! JSON: " + response);
-
                 Weather weather = Weather.fromJSON(response);
+                updateUI(weather);
             }
 
             @Override
@@ -162,6 +170,13 @@ private static final String TAG = "Weather";
                 Log.d(TAG, "Status code " + statusCode);
             }
         });
+    }
+
+    private void updateUI(Weather weather) {
+        mTextViewDegree.setText(weather.getTemperature());
+        mTextViewCountry.setText(weather.getCity());
+        int resourceID = getResources().getIdentifier(weather.getIcon(), "drawable", getPackageName());
+        mImageViewStatusImage.setImageResource(resourceID);
     }
 
     @Override
