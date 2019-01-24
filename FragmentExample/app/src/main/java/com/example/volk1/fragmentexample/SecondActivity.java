@@ -1,14 +1,15 @@
 package com.example.volk1.fragmentexample;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
 
     static final String STATE_FRAGMENT = "state_of_fragment";
 
@@ -18,14 +19,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_second);
 
-        Button next_btn = findViewById(R.id.next_btn);
-        next_btn.setOnClickListener(new View.OnClickListener() {
+        Button prev_btn = findViewById(R.id.prev_btn);
+        prev_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -53,9 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void displayFragment() {
         SimpleFagment simpleFagment = SimpleFagment.newInstance();
-
         FragmentManager fragmentManager = getSupportFragmentManager();
-
         FragmentTransaction fragmentTransactionOne = fragmentManager.beginTransaction();
 
         fragmentTransactionOne

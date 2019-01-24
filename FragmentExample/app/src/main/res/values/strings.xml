@@ -26,5 +26,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="like_the_song">LIKE THE SONG?</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="google_leak_not">Google says passing activity context to a dynamically created view causes a memory leak in a 2009 post. Does it still cause a leak in v19+?\n\n%1$s</string>
 
 </resources>
