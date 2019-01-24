@@ -1,4 +1,4 @@
-package com.example.volk1.fragmentexample;
+package com.example.volk1.fragmentcommunicate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class SecondActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity implements SimpleFagment.OnFragmentInteractionListener {
 
     static final String STATE_FRAGMENT = "state_of_fragment";
+
+    private int mRadioButtonChoice = 2;
 
     private Button mButton;
     private boolean isFragmentDisplayed = false;
@@ -53,7 +56,7 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void displayFragment() {
-        SimpleFagment simpleFagment = SimpleFagment.newInstance();
+        SimpleFagment simpleFagment = SimpleFagment.newInstance(mRadioButtonChoice);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransactionOne = fragmentManager.beginTransaction();
 
@@ -84,5 +87,11 @@ public class SecondActivity extends AppCompatActivity {
         // Save the state of the fragment (true=open, false=closed).
         savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed);
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRadioButtonChoice(int choice) {
+        mRadioButtonChoice = choice;
+        Toast.makeText(getApplicationContext(), "Choice is " + Integer.toString(choice), Toast.LENGTH_SHORT).show();
     }
 }
