@@ -43,7 +43,7 @@ public class SimpleFagment extends Fragment {
 
         final RadioGroup radioGroup = rootView.findViewById(R.id.radio_group);
 
-        if (getArguments().containsKey(CHOICE)) {
+        if (getArguments() != null && getArguments().containsKey(CHOICE)) {
             // A choice was made, so get the choice
             mRadioButtonChoice = getArguments().getInt(CHOICE);
             // Check the radio button choice.
