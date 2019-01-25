@@ -13,7 +13,7 @@ public class SecondActivity extends AppCompatActivity implements SimpleFagment.O
 
     static final String STATE_FRAGMENT = "state_of_fragment";
 
-    private int mRadioButtonChoice = 2;
+    private String mRadioButtonChoice = "None";
 
     private Button mButton;
     private boolean isFragmentDisplayed = false;
@@ -90,8 +90,8 @@ public class SecondActivity extends AppCompatActivity implements SimpleFagment.O
     }
 
     @Override
-    public void onRadioButtonChoice(int choice) {
+    public void onRadioButtonChoice(String choice) {
         mRadioButtonChoice = choice;
-        Toast.makeText(getApplicationContext(), "Choice is " + Integer.toString(choice), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Choice is " + choice, Toast.LENGTH_SHORT).show();
     }
 }

@@ -28,10 +28,10 @@ public class SimpleFagment extends Fragment {
         // Required empty public constructor
     }
 
-    public static SimpleFagment newInstance(int choice) {
+    public static SimpleFagment newInstance(String choice) {
         SimpleFagment simpleFagment = new SimpleFagment();
         Bundle arguments = new Bundle();
-        arguments.putInt(CHOICE, choice);
+        arguments.putString(CHOICE, choice);
         simpleFagment.setArguments(arguments);
         return simpleFagment;
     }
@@ -63,16 +63,16 @@ public class SimpleFagment extends Fragment {
                     case YES:
                         textView.setText(R.string.yes_message);
                         mRadioButtonChoice = YES;
-                        mListener.onRadioButtonChoice(YES);
+                        mListener.onRadioButtonChoice("Yes");
                         break;
                     case NO:
                         textView.setText(R.string.no_message);
                         mRadioButtonChoice = NO;
-                        mListener.onRadioButtonChoice(NO);
+                        mListener.onRadioButtonChoice("No");
                         break;
                     default:
                         mRadioButtonChoice = NONE;
-                        mListener.onRadioButtonChoice(NONE);
+                        mListener.onRadioButtonChoice("None");
                         break;
                 }
             }
@@ -103,6 +103,6 @@ public class SimpleFagment extends Fragment {
     }
 
     interface OnFragmentInteractionListener {
-        void onRadioButtonChoice(int choice);
+        void onRadioButtonChoice(String choice);
     }
 }
