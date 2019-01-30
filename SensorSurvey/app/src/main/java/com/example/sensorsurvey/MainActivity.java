@@ -1,14 +1,16 @@
 package com.example.sensorsurvey;
 
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -22,10 +24,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView mTextSensorLight;
     private TextView mTextSensorProximity;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mTextSensorLight = findViewById(R.id.label_light);
         mTextSensorProximity = findViewById(R.id.label_proximity);
@@ -74,6 +78,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case Sensor.TYPE_LIGHT:
                 mTextSensorLight.setText(getResources().getString(
                         R.string.label_light, currentVal));
+
+                if (currentVal > 0) {
+                    int clr = (int) currentVal;
+                    setActivityBackgroundColor(Color.rgb(clr, clr, clr));
+                } else {
+                    setActivityBackgroundColor(Color.RED);
+                }
                 break;
             case Sensor.TYPE_PROXIMITY:
                 mTextSensorProximity.setText(getResources().getString(
@@ -85,8 +96,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+    public void setActivityBackgroundColor(int color) {
+        View view = this.getWindow().getDecorView();
+        view.setBackgroundColor(color);
+    }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-
     }
 }
