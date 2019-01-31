@@ -8,6 +8,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -24,12 +26,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView mTextSensorLight;
     private TextView mTextSensorProximity;
 
+    // ImageView to display changing image
+    private ImageView mImageView;
+    ViewGroup.LayoutParams mParams;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mImageView = findViewById(R.id.iv_android);
+        mParams = mImageView.getLayoutParams();
 
         mTextSensorLight = findViewById(R.id.label_light);
         mTextSensorProximity = findViewById(R.id.label_proximity);
@@ -89,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case Sensor.TYPE_PROXIMITY:
                 mTextSensorProximity.setText(getResources().getString(
                         R.string.label_proximity, currentVal));
+                mParams.width = (int) currentVal;
+                mParams.height = (int) currentVal;
                 break;
             default:
                 break;
