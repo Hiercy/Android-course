@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Random;
-
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager mSensorManager;
@@ -21,10 +19,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Individual light and proximity sensors.
     private Sensor mSensorProximity;
     private Sensor mSensorLight;
+    private Sensor mSensorHumidity;
 
     // TextViews to display current sensor values
     private TextView mTextSensorLight;
     private TextView mTextSensorProximity;
+    private TextView mTextSensorHumidity;
 
     // ImageView to display changing image
     private ImageView mImageView;
@@ -41,11 +41,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mTextSensorLight = findViewById(R.id.label_light);
         mTextSensorProximity = findViewById(R.id.label_proximity);
+        mTextSensorHumidity = findViewById(R.id.label_humidity);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         mSensorProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         mSensorLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        mSensorHumidity = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
 
         String sensor_not_found = getResources().getString(R.string.error_no_sensor);
 
@@ -54,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
         if (mSensorLight == null) {
             mTextSensorLight.setText(sensor_not_found);
+        }
+        if (mSensorHumidity == null) {
+            mTextSensorHumidity.setText(R.string.error_no_sensor);
         }
     }
 
@@ -64,9 +69,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (mSensorLight != null) {
             mSensorManager.registerListener(this, mSensorLight, SensorManager.SENSOR_DELAY_NORMAL);
         }
-
         if (mSensorProximity != null) {
             mSensorManager.registerListener(this, mSensorProximity, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mSensorHumidity != null) {
+            mSensorManager.registerListener(this, mSensorHumidity, SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
 
@@ -99,6 +106,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         R.string.label_proximity, currentVal));
                 mParams.width = (int) currentVal;
                 mParams.height = (int) currentVal;
+                break;
+            case Sensor.TYPE_RELATIVE_HUMIDITY:
+                mTextSensorHumidity.setText(getResources().getString(
+                        R.string.label_humidity, currentVal));
                 break;
             default:
                 break;
