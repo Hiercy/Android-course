@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             default:
                 break;
         }
-
     }
 
     public void setActivityBackgroundColor(int color) {
