@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         for (int i = 0; i <= 20; i++) {
-            mWordList.add("Word " + i);
+            mWordList.add(" " + getResources().getString(R.string.word) + " " + i);
             mWordList = mWordListReset;
         }
 
@@ -43,15 +43,12 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, gridCount));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-
                 int wordListSize = mWordList.size();
-                mWordList.add("+ Word " + wordListSize);
+                mWordList.add("+ " + getResources().getString(R.string.word) + wordListSize);
                 mRecyclerView.getAdapter().notifyDataSetChanged();
                 mRecyclerView.smoothScrollToPosition(wordListSize);
             }
@@ -94,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeData() {
         mWordList.clear();
         for (int i = 0; i <= 20; i++)
-            mWordList.add("Word " + i);
+            mWordList.add(getString(R.string.word) + i);
         mRecyclerView.getAdapter().notifyDataSetChanged();
     }
 }

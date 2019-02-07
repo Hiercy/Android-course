@@ -35,9 +35,11 @@ class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolde
 
         @Override
         public void onClick(View view) {
+            String clickOutput = view.getContext().getString(R.string.clicked) +
+                    wordItemView.getText();
             int mPosition = getLayoutPosition();
-            String element = mWordList.get(mPosition);
-            mWordList.set(mPosition, "Clicked " + element);
+
+            mWordList.set(mPosition, clickOutput);
             mAdapter.notifyDataSetChanged();
         }
     }
