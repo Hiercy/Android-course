@@ -1,0 +1,4 @@
+#Sat Feb 09 11:43:05 MSK 2019
+base.0=C\:\\Users\\volk1\\AndroidStudioProjects\\Android_course\\SimpleAccessibility_start\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+path.0=classes.dex
+renamed.0=classes.dex
